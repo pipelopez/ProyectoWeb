@@ -74,7 +74,7 @@ public class UsuarioWebService {
 			usuarioService.actualizarUsuario(login, estadoUsuario);
 			return "Usuario actualizado correctamente";
 		} catch (IWDaoException e) {
-			e.printStackTrace();
+			e.printStackTrace();//holi
 			return "No se pudo actualizar";
 		} catch (IWServiceException e) {
 			e.printStackTrace();
