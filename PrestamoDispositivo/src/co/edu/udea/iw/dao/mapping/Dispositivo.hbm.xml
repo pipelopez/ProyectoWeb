@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/05/2016 11:10:09 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.udea.iw.dto.Dispositivo" table="Dispositivo">
+        <id name="idDispositivo" type="java.lang.Integer">
+            <column name="IdDispositivo" precision="12"/>
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="java.lang.String">
+            <column name="Nombre" length="50" not-null="true"/>
+        </property>
+        <property name="estadoDispositivo" type="java.lang.String">
+            <column name="EstadoDispositivo" length="25" not-null="true"/>
+        </property>
+        <property name="valor" type="java.lang.Integer">
+            <column name="Valor" length="20" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

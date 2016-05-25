@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/05/2016 11:13:08 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.udea.iw.dto.Solicitud" table="Solicitud">
+        <id name="idSolicitud" type="java.lang.Integer">
+            <column name="IdSolicitud" precision="12"/>
+            <generator class="assigned" />
+        </id>
+        <one-to-one name="usuarioSolicita" class="co.edu.udea.iw.dto.Usuario" cascade="save-update"></one-to-one><!-- comprobar si funciona -->
+        <many-to-one name="usuarioAprueba" class="co.edu.udea.iw.dto.Usuario" fetch="join">
+            <column name="UsuarioAprueba" length="25" not-null="true"/>
+        </many-to-one>
+        <one-to-one name="dispositivo" class="co.edu.udea.iw.dto.Dispositivo" cascade="save-update"></one-to-one>
+        <property name="estadoSolicitud" type="java.lang.String">
+            <column name="EstadoSolicitud" length="25" not-null="true" default="Espera"/>
+        </property>
+    </class>
+</hibernate-mapping>

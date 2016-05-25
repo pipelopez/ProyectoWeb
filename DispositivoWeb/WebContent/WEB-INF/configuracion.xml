@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/Prestamo" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>co/edu/udea/iw/dao/mapping/Dispositivo.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Persona.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Prestamo.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Rol.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Sancion.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Solicitud.hbm.xml</value>
+				<value>co/edu/udea/iw/dao/mapping/Usuario.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="javax.persistence.validation.mode">none</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="personaDao" class="co.edu.udea.iw.dao.hibernate.PersonaDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="dispositivoDao" class="co.edu.udea.iw.dao.hibernate.DispositivoDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="usuarioDao" class="co.edu.udea.iw.dao.hibernate.UsuarioDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="prestamoDao" class="co.edu.udea.iw.dao.hibernate.PrestamoDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="sancionDao" class="co.edu.udea.iw.dao.hibernate.SancionDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="solicitudDao" class="co.edu.udea.iw.dao.hibernate.SolicitudDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="personaService" class="co.edu.udea.iw.service.PersonaService">
+		<property name="personaDAO" ref="personaDao"></property>
+		<property name="usuarioDAO" ref="usuarioDao"></property>
+	</bean>
+	
+	<bean id="usuarioService" class="co.edu.udea.iw.service.UsuarioService">		
+		<property name="usuarioDAO" ref="usuarioDao"></property>
+	</bean>
+	
+	<bean id="solicitudService" class="co.edu.udea.iw.service.SolicitudService">
+		<property name="solicitudDAO" ref="solicitudDao"></property>
+		<property name="usuarioDAO" ref="usuarioDao"></property>
+		<property name="dispositivoDAO" ref="dispositivoDao"></property>
+	</bean>
+	
+	<bean id="dispositivoService" class="co.edu.udea.iw.service.DispositivoService">		
+		<property name="dispositivoDAO" ref="dispositivoDao"></property>
+	</bean>
+	
+	<bean id="sancionService" class="co.edu.udea.iw.service.SancionService">
+		<property name="sancionDAO" ref="sancionDao"></property>
+		<property name="usuarioDAO" ref="usuarioDao"></property>
+		<property name="prestamoDAO" ref="prestamoDao"></property>
+	</bean>
+	
+	<bean id="prestamoService" class="co.edu.udea.iw.service.PrestamoService">
+		<property name="solicitudDAO" ref="solicitudDao"></property>
+		<property name="usuarioDAO" ref="usuarioDao"></property>
+		<property name="prestamoDAO" ref="prestamoDao"></property>
+	</bean>	
+	
+	<context:component-scan base-package="co.edu.udea.iw.web.controller"/>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>
+

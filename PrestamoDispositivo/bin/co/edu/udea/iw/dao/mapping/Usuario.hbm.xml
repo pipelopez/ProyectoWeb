@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/05/2016 11:11:39 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.udea.iw.dto.Usuario" table="Usuario">
+        <id name="login" type="java.lang.String">
+            <column name="Login" precision="25"/>
+            <generator class="assigned" />
+        </id>
+        <property name="contrasena" type="java.lang.String">
+            <column name="Contrasena" length="120" not-null="true"/>
+        </property>
+        <many-to-one name="rol" class="co.edu.udea.iw.dto.Rol" fetch="join">
+            <column name="Rol" length="3" not-null="true"/>
+        </many-to-one>
+        <property name="estadoUsuario" type="java.lang.String">
+            <column name="EstadoUsuario" length="25" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

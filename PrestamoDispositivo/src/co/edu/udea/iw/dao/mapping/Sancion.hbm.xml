@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7/05/2016 11:14:16 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.udea.iw.dto.Sancion" table="Sancion">
+        <id name="idSancion" type="java.lang.Integer">
+            <column name="IdSancion" precision="12"/>
+            <generator class="assigned" />
+        </id>
+        <property name="tipoSancion" type="java.lang.String">
+            <column name="TipoSancion" length="25" not-null="true"/>
+        </property>
+        <one-to-one name="prestamo" class="co.edu.udea.iw.dto.Prestamo" cascade="save-update"></one-to-one><!-- comprobar si funciona -->
+        <property name="descripcion" type="java.lang.String">
+            <column name="Descripcion" length="120" not-null="true"/>
+        </property>
+        <many-to-one name="usuarioSanciona" class="co.edu.udea.iw.dto.Usuario" fetch="join">
+            <column name="UsuarioSanciona" length="25" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
