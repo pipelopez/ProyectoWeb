@@ -21,7 +21,22 @@ import co.edu.udea.iw.exception.IWServiceException;
 import co.edu.udea.iw.service.UsuarioService;
 import co.edu.udea.iw.web.dto.UsuarioWS;
 
+/**
+ * Clase para manipular los datos datos de los usuarios
+ * @author Felipe Lopez
+ * @author Daniel Alvarez
+ * @author Julian Trujillo
+ * @version 2016/05/07
+ *
+ */
+
+/**
+ * Marca la clase como un bean y permite realizar
+ * operaciones en el contexto de la aplicacion
+ */
 @Component
+
+/
 @Path("Usuario")
 public class UsuarioWebService {
 
