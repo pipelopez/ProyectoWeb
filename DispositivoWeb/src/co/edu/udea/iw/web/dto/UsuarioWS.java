@@ -5,17 +5,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import co.edu.udea.iw.dto.Rol;
 
 /**
- * Clase dto para los datos de los usuarios
+ * Clase dto para los datos de los dispositivos
  * @author Felipe Lopez
  * @author Daniel Alvarez
  * @author Julian Trujillo
- * @version 2016/05/07
+ * @version 2016/05/20
  *
  */
 @XmlRootElement
 public class UsuarioWS {
-	
-	
 	
 	public UsuarioWS() {}
 
